@@ -1,0 +1,54 @@
+<h1>Listing Stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>Att</th>
+      <th>Att per game</th>
+      <th>Yds</th>
+      <th>Avg</th>
+      <th>Yds per game</th>
+      <th>Td</th>
+      <th>Lng</th>
+      <th>First</th>
+      <th>First percent</th>
+      <th>Twenty plus</th>
+      <th>Forty plus</th>
+      <th>Fum</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for stat <- @stats do %>
+    <tr>
+      <td><%= stat.player %></td>
+      <td><%= stat.team %></td>
+      <td><%= stat.position %></td>
+      <td><%= stat.att %></td>
+      <td><%= stat.att_per_game %></td>
+      <td><%= stat.yds %></td>
+      <td><%= stat.avg %></td>
+      <td><%= stat.yds_per_game %></td>
+      <td><%= stat.td %></td>
+      <td><%= stat.lng %></td>
+      <td><%= stat.first %></td>
+      <td><%= stat.first_percent %></td>
+      <td><%= stat.twenty_plus %></td>
+      <td><%= stat.forty_plus %></td>
+      <td><%= stat.fum %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.stat_path(@conn, :show, stat) %></span>
+        <span><%= link "Edit", to: Routes.stat_path(@conn, :edit, stat) %></span>
+        <span><%= link "Delete", to: Routes.stat_path(@conn, :delete, stat), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Stat", to: Routes.stat_path(@conn, :new) %></span>

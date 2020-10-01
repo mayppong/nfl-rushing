@@ -55,3 +55,15 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 ### Installation and running this solution
 ... TODO
+
+
+```
+docker-compose up npm-install
+docker-compose up web
+```
+```
+docker-compose exec web mix ecto.migrate
+```
+```
+docker-compose exec web mix rushing.load_data ./priv/repo/rushing.json
+```

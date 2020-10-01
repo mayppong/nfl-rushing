@@ -1,0 +1,71 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :player %>
+  <%= text_input f, :player %>
+  <%= error_tag f, :player %>
+
+  <%= label f, :team %>
+  <%= text_input f, :team %>
+  <%= error_tag f, :team %>
+
+  <%= label f, :position %>
+  <%= text_input f, :position %>
+  <%= error_tag f, :position %>
+
+  <%= label f, :att %>
+  <%= number_input f, :att %>
+  <%= error_tag f, :att %>
+
+  <%= label f, :att_per_game %>
+  <%= number_input f, :att_per_game, step: "any" %>
+  <%= error_tag f, :att_per_game %>
+
+  <%= label f, :yds %>
+  <%= number_input f, :yds %>
+  <%= error_tag f, :yds %>
+
+  <%= label f, :avg %>
+  <%= number_input f, :avg, step: "any" %>
+  <%= error_tag f, :avg %>
+
+  <%= label f, :yds_per_game %>
+  <%= number_input f, :yds_per_game %>
+  <%= error_tag f, :yds_per_game %>
+
+  <%= label f, :td %>
+  <%= number_input f, :td %>
+  <%= error_tag f, :td %>
+
+  <%= label f, :lng %>
+  <%= number_input f, :lng %>
+  <%= error_tag f, :lng %>
+
+  <%= label f, :first %>
+  <%= number_input f, :first %>
+  <%= error_tag f, :first %>
+
+  <%= label f, :first_percent %>
+  <%= number_input f, :first_percent, step: "any" %>
+  <%= error_tag f, :first_percent %>
+
+  <%= label f, :twenty_plus %>
+  <%= number_input f, :twenty_plus %>
+  <%= error_tag f, :twenty_plus %>
+
+  <%= label f, :forty_plus %>
+  <%= number_input f, :forty_plus %>
+  <%= error_tag f, :forty_plus %>
+
+  <%= label f, :fum %>
+  <%= number_input f, :fum %>
+  <%= error_tag f, :fum %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

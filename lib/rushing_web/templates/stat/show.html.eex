@@ -1,0 +1,83 @@
+<h1>Show Stat</h1>
+
+<ul>
+
+  <li>
+    <strong>Player:</strong>
+    <%= @stat.player %>
+  </li>
+
+  <li>
+    <strong>Team:</strong>
+    <%= @stat.team %>
+  </li>
+
+  <li>
+    <strong>Position:</strong>
+    <%= @stat.position %>
+  </li>
+
+  <li>
+    <strong>Att:</strong>
+    <%= @stat.att %>
+  </li>
+
+  <li>
+    <strong>Att per game:</strong>
+    <%= @stat.att_per_game %>
+  </li>
+
+  <li>
+    <strong>Yds:</strong>
+    <%= @stat.yds %>
+  </li>
+
+  <li>
+    <strong>Avg:</strong>
+    <%= @stat.avg %>
+  </li>
+
+  <li>
+    <strong>Yds per game:</strong>
+    <%= @stat.yds_per_game %>
+  </li>
+
+  <li>
+    <strong>Td:</strong>
+    <%= @stat.td %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @stat.lng %>
+  </li>
+
+  <li>
+    <strong>First:</strong>
+    <%= @stat.first %>
+  </li>
+
+  <li>
+    <strong>First percent:</strong>
+    <%= @stat.first_percent %>
+  </li>
+
+  <li>
+    <strong>Twenty plus:</strong>
+    <%= @stat.twenty_plus %>
+  </li>
+
+  <li>
+    <strong>Forty plus:</strong>
+    <%= @stat.forty_plus %>
+  </li>
+
+  <li>
+    <strong>Fum:</strong>
+    <%= @stat.fum %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.stat_path(@conn, :edit, @stat) %></span>
+<span><%= link "Back", to: Routes.stat_path(@conn, :index) %></span>
