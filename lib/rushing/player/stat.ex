@@ -22,6 +22,30 @@ defmodule Rushing.Player.Stat do
     timestamps()
   end
 
+  @doc """
+  Remap keys from JSON to match struct keys.
+  """
+  @spec from_json(Map.t) :: Map.t
+  def from_json(attrs) do
+  %{
+    player: attrs["Player"],
+    team: attrs["Team"],
+    position: attrs["Pos"],
+    att: attrs["Att"],
+    att_per_game: attrs["Att/G"],
+    yds: attrs["Yds"],
+    yds_per_game: attrs["Yds/G"],
+    avg: attrs["Avg"],
+    td: attrs["TD"],
+    lng: attrs["Lng"],
+    first: attrs["1st"],
+    first_percent: attrs["1st%"],
+    twenty_plus: attrs["20+"],
+    forty_plus: attrs["40+"],
+    fum: attrs["FUM"]
+  }
+  end
+
   @doc false
   def changeset(stat, attrs) do
     stat
