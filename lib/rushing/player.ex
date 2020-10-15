@@ -2,6 +2,7 @@ defmodule Rushing.Player do
   @moduledoc """
   The Player context.
   """
+  import Ecto.Query
 
   alias Rushing.Repo
   alias Rushing.Player.Stat
@@ -17,6 +18,11 @@ defmodule Rushing.Player do
   """
   def list_stats do
     Repo.all(Stat)
+  end
+
+  @spec list_stats(Tuple.t) :: [Ecto.Schema.t()]
+  def list_stats(filter) do
+    from(stats in Stat) |> build_stat_query(filter) |> Repo.all
   end
 
   @doc """
@@ -99,4 +105,26 @@ defmodule Rushing.Player do
   def change_stat(%Stat{} = stat, attrs \\ %{}) do
     Stat.changeset(stat, attrs)
   end
+
+
+  # Private method for resolving a map of fields and value to the WHERE clause to the query
+  @spec build_stat_query(Ecto.Queryable.t, Tuple.t) :: Ecto.Queryable.t
+  defp build_stat_query(base_query, [{:filter, filter} | tail]) do
+    query = filter
+    |> Enum.reduce(base_query, fn({k, v}, query) ->
+      from q in query,
+        where: ilike(field(q, ^k), ^"#{v}%")
+    end)
+    build_stat_query(query, tail)
+  end
+
+  # Private method for resolving a key-value pair to the ORDER BY clause to the query
+  @spec build_stat_query(Ecto.Queryable.t, Tuple.t) :: Ecto.Queryable.t
+  defp build_stat_query(base_query, [{:order, order} | tail]) do
+    query = base_query
+    |> order_by(^order)
+    build_stat_query(query, tail)
+  end
+
+  defp build_stat_query(query, _), do: query
 end

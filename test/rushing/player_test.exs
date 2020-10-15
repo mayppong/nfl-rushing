@@ -23,6 +23,29 @@ defmodule Rushing.PlayerTest do
       assert Player.list_stats() == [stat]
     end
 
+    test "list_stats/1 filtering by player's name" do
+      stat = stat_fixture()
+      assert Player.list_stats([filter: %{player: stat.player}]) |> hd == stat
+    end
+
+    test "list_stats/2 with descending sorting order" do
+      stat = stat_fixture(%{att: 45, avg: 100})
+      stat_fixture()
+      assert Player.list_stats([filter: %{player: stat.player}, order: [desc: :att]]) |> hd == stat
+    end
+
+    test "list_stats/2 with ascending sorting order" do
+      stat_fixture(%{att: 45, avg: 100})
+      stat = stat_fixture()
+      assert Player.list_stats([filter: %{player: stat.player}, order: [asc: :att]]) |> hd == stat
+    end
+
+    test "list_stats/2 with duplicate sorting order" do
+      stat_fixture(%{att: 45, avg: 100})
+      stat = stat_fixture()
+      assert Player.list_stats([filter: %{player: stat.player}, order: [asc: :att, asc: :avg]]) |> hd == stat
+    end
+
     test "get_stat!/1 returns the stat with given id" do
       stat = stat_fixture()
       assert Player.get_stat!(stat.id) == stat

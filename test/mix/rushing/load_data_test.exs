@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Rushing.LoadDataTest do
       Application.app_dir(:rushing, "priv/repo/rushing_test.json")
       |> LoadData.run
       
-      assert "Joe Banyard" == Rushing.Player.list_stats(%{player: "Joe Banyard"}) |> hd |> Map.get(:player)
+      assert "Joe Banyard" == Rushing.Player.list_stats([filter: %{player: "Joe Banyard"}]) |> hd |> Map.get(:player)
     end
   end
 end
