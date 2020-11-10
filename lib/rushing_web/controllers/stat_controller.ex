@@ -4,6 +4,10 @@ defmodule RushingWeb.StatController do
   alias Rushing.Player
   alias Rushing.Player.Stat
 
+  def index(conn, %{"player" => name}) do
+    stats = Player.list_stats([filter: %{player: name}])
+    render(conn, "index.html", stats: stats)
+  end
   def index(conn, _params) do
     stats = Player.list_stats()
     render(conn, "index.html", stats: stats)
