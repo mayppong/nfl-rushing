@@ -1,6 +1,7 @@
 _build/
 assets/node_modules/
 deps/
+priv/static
 
 .DS_Store
 *.swp

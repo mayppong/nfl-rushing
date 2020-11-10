@@ -28,11 +28,16 @@ services:
     links:
       - postgres-test
 
+  # Not running credo as part of test for now
+  credo:
+    <<: *elixir
+    command: mix credo
+
   postgres-test:
     <<: *postgres
     environment:
       POSTGRES_DB: "rushing_test"
-      POSTGRES_USER: "postgresnpm-"
+      POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
 
   npm-install:
