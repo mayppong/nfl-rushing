@@ -26,6 +26,30 @@ defmodule Rushing.Player do
   end
 
   @doc """
+  Returns a stream of stats.
+
+  ## Examples
+
+      iex> stream_stats()
+      #Stream<[]>
+
+  To execute the stream, make sure it is wrapped within `Repo.transaction`.
+
+  ## Examples
+
+      stream = stream_stats()
+      Repo.transaction(fn() ->
+        stream |> Enum.take(1)
+      end)
+
+  """
+  @spec stream_stats :: Enum.t
+  def stream_stats, do: Repo.stream(Stat)
+  def stream_stats(filter) do
+    from(stats in Stat) |> build_stat_query(filter) |> Repo.stream
+  end
+
+  @doc """
   Gets a single stat.
 
   Raises `Ecto.NoResultsError` if the Stat does not exist.

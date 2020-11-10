@@ -63,4 +63,27 @@ defmodule RushingWeb.StatController do
     |> put_flash(:info, "Stat deleted successfully.")
     |> redirect(to: Routes.stat_path(conn, :index))
   end
+
+  def export(conn, _) do
+    conn = conn
+    |> put_resp_header("content-disposition", "attachment; filename=players.csv")
+    |> put_resp_content_type("text/csv")
+    |> send_chunked(:ok)
+
+    stream = Player.stream_stats
+    |> Stream.map(&Map.drop(&1, [:__struct__, :__meta__]))
+    |> CSV.Encoding.Encoder.encode(headers: true)
+
+    {:ok, conn} = Rushing.Repo.transaction(fn() ->
+      stream
+      |> Enum.reduce_while(conn, fn (data, conn) ->
+        case chunk(conn, data) do
+          {:ok, conn} -> {:cont, conn}
+          {:error, :closed} -> {:halt, conn}
+        end
+      end)
+    end)
+
+    conn
+  end
 end

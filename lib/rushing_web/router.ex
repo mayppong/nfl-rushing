@@ -17,6 +17,7 @@ defmodule RushingWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/stats/export", StatController, :export
     resources "/stats", StatController
   end
 

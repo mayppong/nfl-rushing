@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: ./deployment/Dockerfile.dev
-    command: mix phx.server
+    command: sh -c "mix deps.get && mix phx.server"
     working_dir: "/nfl-rushing"
     ports:
       - "4000:4000"

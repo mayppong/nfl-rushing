@@ -46,6 +46,15 @@ defmodule Rushing.PlayerTest do
       assert Player.list_stats([filter: %{player: stat.player}, order: [asc: :att, asc: :avg]]) |> hd == stat
     end
 
+    test "stream_stats/0" do
+      stat = stat_fixture()
+      stream = Player.stream_stats
+      {:ok, result} = Rushing.Repo.transaction(fn() ->
+        stream |> Enum.to_list
+      end)
+      assert result |> hd == stat
+    end
+
     test "get_stat!/1 returns the stat with given id" do
       stat = stat_fixture()
       assert Player.get_stat!(stat.id) == stat
