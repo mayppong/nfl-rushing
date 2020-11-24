@@ -1,6 +1,6 @@
 <h1>Listing Stats</h1>
 
-<form method="GET" action="<%= Routes.stat_path(@conn, :index) %>" class="row">
+<form method="GET" action="<%= Routes.stat_path(@conn, :index, @conn.params) %>" class="row">
   <h3 class="column column-10">Filter</h3>
   <input type="text" name="player" class="column column-33 column-offset-10" placeholder="Player's name"/>
   <button type="submit" class="column column-20 column-offset-10">Search</button>
@@ -17,11 +17,11 @@
       <th>Position</th>
       <th>Att</th>
       <th>Att per game</th>
-      <th><a href="<%= Routes.stat_path(@conn, :index, @conn.params) %>">Yds</a></th>
+      <th><a href="<%= Routes.stat_path(@conn, :index, Map.put(@conn.params, :order, build_order_param(@conn.params, "yds"))) %>">Yds</a></th>
       <th>Avg</th>
       <th>Yds per game</th>
-      <th>Td</th>
-      <th>Lng</th>
+      <th><a href="<%= Routes.stat_path(@conn, :index, Map.put(@conn.params, :order, build_order_param(@conn.params, "td"))) %>">Td</a></th>
+      <th><a href="<%= Routes.stat_path(@conn, :index, Map.put(@conn.params, :order, build_order_param(@conn.params, "lng"))) %>">Lng</a></th>
       <th>First</th>
       <th>First percent</th>
       <th>Twenty plus</th>

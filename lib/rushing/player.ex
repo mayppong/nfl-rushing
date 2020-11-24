@@ -20,7 +20,7 @@ defmodule Rushing.Player do
     Repo.all(Stat)
   end
 
-  @spec list_stats(Tuple.t) :: [Ecto.Schema.t()]
+  @spec list_stats(Keyword.t) :: [Ecto.Schema.t()]
   def list_stats(filter) do
     from(stats in Stat) |> build_stat_query(filter) |> Repo.all
   end
@@ -132,7 +132,7 @@ defmodule Rushing.Player do
 
 
   # Private method for resolving a map of fields and value to the WHERE clause to the query
-  @spec build_stat_query(Ecto.Queryable.t, Tuple.t) :: Ecto.Queryable.t
+  @spec build_stat_query(Ecto.Queryable.t, Keyword.t) :: Ecto.Queryable.t
   defp build_stat_query(base_query, [{:filter, filter} | tail]) do
     query = filter
     |> Enum.reduce(base_query, fn({k, v}, query) ->
@@ -143,7 +143,7 @@ defmodule Rushing.Player do
   end
 
   # Private method for resolving a key-value pair to the ORDER BY clause to the query
-  @spec build_stat_query(Ecto.Queryable.t, Tuple.t) :: Ecto.Queryable.t
+  @spec build_stat_query(Ecto.Queryable.t, Keyword.t) :: Ecto.Queryable.t
   defp build_stat_query(base_query, [{:order, order} | tail]) do
     query = base_query
     |> order_by(^order)

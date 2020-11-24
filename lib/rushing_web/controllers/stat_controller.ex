@@ -4,12 +4,8 @@ defmodule RushingWeb.StatController do
   alias Rushing.Player
   alias Rushing.Player.Stat
 
-  def index(conn, %{"player" => name}) do
-    stats = Player.list_stats([filter: %{player: name}])
-    render(conn, "index.html", stats: stats)
-  end
-  def index(conn, _params) do
-    stats = Player.list_stats()
+  def index(conn, params) do
+    stats = params |> params_to_query |> Player.list_stats()
     render(conn, "index.html", stats: stats)
   end
 
@@ -64,13 +60,15 @@ defmodule RushingWeb.StatController do
     |> redirect(to: Routes.stat_path(conn, :index))
   end
 
-  def export(conn, _) do
+  def export(conn, params) do
     conn = conn
     |> put_resp_header("content-disposition", "attachment; filename=players.csv")
     |> put_resp_content_type("text/csv")
     |> send_chunked(:ok)
 
-    stream = Player.stream_stats
+    stream = params
+    |> params_to_query
+    |> Player.stream_stats
     |> Stream.map(&Map.drop(&1, [:__struct__, :__meta__]))
     |> CSV.Encoding.Encoder.encode(headers: true)
 
@@ -85,5 +83,21 @@ defmodule RushingWeb.StatController do
     end)
 
     conn
+  end
+
+  # Process HTTP request params into a Keyword list that our internal
+  # Player module can use to construct an Ecto.Queryable
+  defp params_to_query(params) do
+    params
+    |> Map.get("order", "")
+    |> String.split(".")
+    |> case do
+      [""] -> [] # case where no order is set and Map.get/3 returns the default
+      [field, "asc"] -> [order: [asc: String.to_existing_atom(field)]]
+      [field, "desc"] -> [order: [desc: String.to_existing_atom(field)]]
+      [field] -> [order: [asc: String.to_existing_atom(field)]]
+      _ -> []
+    end
+    |> Keyword.put(:filter, %{player: Map.get(params, "player")})
   end
 end
