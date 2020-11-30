@@ -45,6 +45,7 @@ defmodule Rushing.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:jaxon, "~> 2.0"}, # see `/lib/mix/rushing/load_data.ex`
       {:csv, "~> 2.4.1"},
       {:credo, "~> 1.5.1", only: :test}
     ]

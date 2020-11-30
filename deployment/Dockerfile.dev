@@ -2,7 +2,7 @@ FROM elixir:1.10-alpine
 
 ENV MIX_HOME=/opt/mix
 
-RUN apk --update add bash openssl nodejs npm inotify-tools \
+RUN apk --update add bash openssl nodejs npm build-base inotify-tools \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /nfl-rushing
