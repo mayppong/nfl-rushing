@@ -10,9 +10,10 @@ defmodule Rushing.Repo.Migrations.CreateStats do
       add :att_per_game, :float
       add :yds, :integer
       add :avg, :float
-      add :yds_per_game, :integer
+      add :yds_per_game, :float
       add :td, :integer
       add :lng, :integer
+      add :lng_t, :boolean
       add :first, :integer
       add :first_percent, :float
       add :twenty_plus, :integer

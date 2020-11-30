@@ -41,7 +41,7 @@
       <td><%= stat.avg %></td>
       <td><%= stat.yds_per_game %></td>
       <td><%= stat.td %></td>
-      <td><%= stat.lng %></td>
+      <td><%= build_longest_rush(stat) %></td>
       <td><%= stat.first %></td>
       <td><%= stat.first_percent %></td>
       <td><%= stat.twenty_plus %></td>

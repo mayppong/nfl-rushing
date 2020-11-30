@@ -3,9 +3,9 @@ defmodule RushingWeb.StatControllerTest do
 
   alias Rushing.Player
 
-  @create_attrs %{att: 42, att_per_game: 120.5, avg: 120.5, first: 42, first_percent: 120.5, forty_plus: 42, fum: 42, lng: 42, player: "some player", position: "some position", td: 42, team: "some team", twenty_plus: 42, yds: 42, yds_per_game: 42}
-  @update_attrs %{att: 43, att_per_game: 456.7, avg: 456.7, first: 43, first_percent: 456.7, forty_plus: 43, fum: 43, lng: 43, player: "some updated player", position: "some updated position", td: 43, team: "some updated team", twenty_plus: 43, yds: 43, yds_per_game: 43}
-  @invalid_attrs %{att: nil, att_per_game: nil, avg: nil, first: nil, first_percent: nil, forty_plus: nil, fum: nil, lng: nil, player: nil, position: nil, td: nil, team: nil, twenty_plus: nil, yds: nil, yds_per_game: nil}
+  @create_attrs %{att: 42, att_per_game: 120.5, avg: 120.5, first: 42, first_percent: 120.5, forty_plus: 42, fum: 42, lng: 42, lng_t: false, player: "some player", position: "some position", td: 42, team: "some team", twenty_plus: 42, yds: 42, yds_per_game: 42}
+  @update_attrs %{att: 43, att_per_game: 456.7, avg: 456.7, first: 43, first_percent: 456.7, forty_plus: 43, fum: 43, lng: 43, lng_t: true, player: "some updated player", position: "some updated position", td: 43, team: "some updated team", twenty_plus: 43, yds: 43, yds_per_game: 43}
+  @invalid_attrs %{att: nil, att_per_game: nil, avg: nil, first: nil, first_percent: nil, forty_plus: nil, fum: nil, lng: nil, lng_t: nil, player: nil, position: nil, td: nil, team: nil, twenty_plus: nil, yds: nil, yds_per_game: nil}
 
   def fixture(:stat) do
     {:ok, stat} = Player.create_stat(@create_attrs)
