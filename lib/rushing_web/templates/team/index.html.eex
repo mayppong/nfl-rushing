@@ -1,0 +1,29 @@
+<h1>Listing Stats</h1>
+
+<form method="GET" action="<%= Routes.stat_path(@conn, :index, @conn.params) %>" class="row">
+  <h3 class="column column-10">Filter</h3>
+  <input type="text" name="player" class="column column-33 column-offset-10" placeholder="Player's name"/>
+  <button type="submit" class="column column-20 column-offset-10">Search</button>
+</form>
+
+<a href="<%= Routes.stat_path(@conn, :index) %>" class="button">Clear</a>
+<a href="<%= Routes.stat_path(@conn, :export, @conn.params) %>" class="button">Download CSV</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Total Yds</th>
+      <th>Avg of Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for team <- @teams do %>
+    <tr>
+      <td><%= stat.team %></td>
+      <td><%= stat.total_yds %></td>
+      <td><%= stat.avg_of_avg %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

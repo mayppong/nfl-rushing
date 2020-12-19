@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       dockerfile: ./deployment/Dockerfile.dev
-    command: mix deps.get
+    command: mix setup
     working_dir: "/nfl-rushing"
     volumes:
       - ./:/nfl-rushing

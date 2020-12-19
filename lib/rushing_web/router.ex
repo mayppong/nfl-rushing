@@ -19,6 +19,8 @@ defmodule RushingWeb.Router do
     get "/", PageController, :index
     get "/stats/export", StatController, :export
     resources "/stats", StatController
+
+    get "/teams", TeamController, :summary
   end
 
   # Other scopes may use custom stacks.
